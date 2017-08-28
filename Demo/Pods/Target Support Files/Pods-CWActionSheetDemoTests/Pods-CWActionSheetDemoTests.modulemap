@@ -1,0 +1,6 @@
+framework module Pods_CWActionSheetDemoTests {
+  umbrella header "Pods-CWActionSheetDemoTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
