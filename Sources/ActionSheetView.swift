@@ -59,7 +59,7 @@ public class ActionSheetView: UIView {
     /// 背景
     fileprivate var backgroundView: UIView!
     /// 分割layer
-    private var divisionLayer: CALayer!
+    private var divisionView: UIView!
     /// 取消按钮
     private var cancelButton: UIButton!
     /// 默认配置
@@ -147,9 +147,9 @@ public class ActionSheetView: UIView {
         containerView.addSubview(tableView)
         
         // 分割线
-        divisionLayer = CALayer()
-        divisionLayer.backgroundColor = UIColor(hex6: 0xededee).cgColor
-        containerView.layer.addSublayer(divisionLayer)
+        divisionView = UIView()
+        divisionView.backgroundColor = UIColor(hex6: 0xededee)
+        containerView.addSubview(divisionView)
         
         // 取消按钮
         cancelButton = UIButton(type: .custom)
@@ -188,15 +188,15 @@ public class ActionSheetView: UIView {
         
         // 
         let divisionViewHeight: CGFloat = (cancelButtonTitle != nil) ? 5.0 : 0.0
-        divisionLayer.frame = CGRect(x: 0, y: tableView.frame.maxY,
+        divisionView.frame = CGRect(x: 0, y: tableView.frame.maxY,
                                      width: kScreenWidth, height: divisionViewHeight)
         
         cancelButton.setTitle(cancelButtonTitle, for: .normal)
         if cancelButtonTitle != nil {
-            cancelButton.frame = CGRect(x: 0, y: divisionLayer.frame.maxY,
+            cancelButton.frame = CGRect(x: 0, y: divisionView.frame.maxY,
                                         width: kScreenWidth, height: buttonHeight)
         } else {
-            cancelButton.frame = CGRect(x: 0, y: divisionLayer.frame.maxY,
+            cancelButton.frame = CGRect(x: 0, y: divisionView.frame.maxY,
                                         width: kScreenWidth, height: 0)
         }
         

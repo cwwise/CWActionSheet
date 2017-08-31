@@ -69,9 +69,9 @@ class ViewController: UITableViewController {
                                               cancelButtonTitle: "取消",
                                               otherButtonTitles: ["确定","稍等"],
                                               clickedHandler: clickedHandler)
-            DispatchQueue.main.asyncAfter(deadline: .now()+4, execute: {
-                actionSheet.insert(buttonTitles: ["测试按钮1", "测试按钮2"], at: 0)
-                //actionSheet.append(buttonTitles: ["测试按钮1", "测试按钮2"])
+            DispatchQueue.main.asyncAfter(deadline: .now()+2, execute: {
+                //actionSheet.insert(buttonTitles: ["测试按钮1", "测试按钮2"], at: 0)
+                actionSheet.append(buttonTitles: ["测试按钮1", "测试按钮2"])
             })
             actionSheet.show()
             
