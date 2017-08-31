@@ -28,6 +28,8 @@ class ActionSheetCell: UITableViewCell {
         
         self.contentView.layer.addSublayer(lineLayer)
         self.contentView.addSubview(titleLabel)
+        
+        self.selectedBackgroundView = UIView()
     }
     
     override func layoutSubviews() {

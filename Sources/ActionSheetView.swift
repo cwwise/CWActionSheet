@@ -12,6 +12,7 @@ private let kScreenHeight = UIScreen.main.bounds.height
 private let kScreenWidth = UIScreen.main.bounds.width
 
 public typealias ActionSheetClickedHandler = ((ActionSheetView, Int) -> Void)
+public typealias ActionSheetShowHandler = ((ActionSheetView) -> Void)
 
 public class ActionSheetView: UIView {
 
@@ -33,11 +34,27 @@ public class ActionSheetView: UIView {
     
     var titleEdgeInsets: UIEdgeInsets
     
-    var buttonHeight: CGFloat = 49.0
+    var buttonHeight: CGFloat
     /// 动画时间
-    var animationDuration: TimeInterval = 0.3
+    var animationDuration: TimeInterval
     
     var separatorColor: UIColor
+    // #E44545
+    var destructiveButtonColor: UIColor
+    
+    var destructiveButtonIndex: Int?
+        
+    var otherButtonTitles: [String] = []
+    // 点击事件
+    public var clickedHandler: ActionSheetClickedHandler?
+    
+    public var didPresentHandler: ActionSheetShowHandler?
+    
+    public var willPresentHandler: ActionSheetShowHandler?
+    
+    public var willDismissHandler: ActionSheetShowHandler?
+    
+    public var didDismissHandler: ActionSheetShowHandler?
     
     fileprivate var tableView: UITableView!
     
@@ -50,12 +67,7 @@ public class ActionSheetView: UIView {
     var divisionLayer: CALayer!
     
     var cancelButton: UIButton!
-    
-    var otherButtonTitles: [String] = []
-    
-    // 点击事件
-    var clickedHandler: ActionSheetClickedHandler?
-    
+
     convenience init() {
         let frame = UIScreen.main.bounds
         self.init(frame: frame)
@@ -65,17 +77,20 @@ public class ActionSheetView: UIView {
         
         titleColor = UIColor(hex6: 0x888888)
         buttonColor = UIColor.black
-        
         titleFont = UIFont.systemFont(ofSize: 14)
         buttonFont = UIFont.systemFont(ofSize: 17)
-        
         separatorColor = UIColor(hex6: 0xd9d9d9)
+        destructiveButtonColor = UIColor(hex6: 0xE44545)
         
+        buttonHeight = 49.0
+        animationDuration = 0.3
         titleLinesNumber = 0
-        
         titleEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         
         super.init(frame: frame)
+        
+        let tintColor = UIColor(hex6: 0xf7f7f7)
+        self.tintColor = tintColor
         setupUI()
     }
     
@@ -132,6 +147,7 @@ public class ActionSheetView: UIView {
         cancelButton = UIButton(type: .custom)
         cancelButton.titleLabel?.font = buttonFont
         cancelButton.setTitleColor(buttonColor, for: .normal)
+        cancelButton.setBackgroundImage(UIImage(color: self.tintColor), for: .highlighted)
         cancelButton.addTarget(self, action: #selector(cancelButtonClicked), for: .touchUpInside)
         containerView.addSubview(cancelButton)
     }
@@ -165,8 +181,28 @@ public class ActionSheetView: UIView {
         cancelButton.frame = CGRect(x: 0, y: divisionLayer.frame.maxY, 
                                     width: kScreenWidth, height: buttonHeight)
         
-        containerView.frame = CGRect(x: 0, y: kScreenHeight,
+        containerView.frame = CGRect(x: 0, y: kScreenHeight - cancelButton.frame.maxY,
                                      width: kScreenWidth, height: cancelButton.frame.maxY)
+    }
+    
+    
+    // MARK: 
+    func append(_ buttonTitle: String, at index: Int = -1) {
+       
+        // 默认值 添加到最后面
+        if index == -1 {
+            
+        } else {
+            
+            
+            
+        }
+        
+    }
+    
+    func append(buttonTitles: [String], at index: Int) {
+        setupView()
+        tableView.reloadData()
     }
     
     func backgroundViewClicked() {
@@ -191,9 +227,16 @@ extension ActionSheetView: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ActionSheetCell
-        cell.titleLabel.text = otherButtonTitles[indexPath.row]
         cell.titleLabel.font = buttonFont
         cell.lineLayer.backgroundColor = separatorColor.cgColor
+        cell.titleLabel.text = otherButtonTitles[indexPath.row]
+        cell.selectedBackgroundView?.backgroundColor = self.tintColor  
+
+        if indexPath.row == destructiveButtonIndex {
+            cell.titleLabel.textColor = destructiveButtonColor
+        } else {
+            cell.titleLabel.textColor = buttonColor
+        }
         return cell
     }
     
@@ -208,27 +251,22 @@ extension ActionSheetView: UITableViewDelegate, UITableViewDataSource {
 extension ActionSheetView {
     
     public func show() {
-        
         // 添加到window上
         let keyWindow = UIApplication.shared.keyWindow!
         keyWindow.addSubview(self)
         
-        self.setupView()
+        setupView()
+        containerView.frame = containerView.frame.offsetBy(dx: 0, dy: containerView.frame.height)
         
         UIView.animate(withDuration: animationDuration, delay: 0, options: .curveEaseOut, animations: { 
             
             let frame = self.containerView.frame
             self.containerView.frame = frame.offsetBy(dx: 0, dy: -frame.height)
-            
             self.backgroundView.alpha = 0.3
             
         }, completion: {(finished) in 
-        
-
             
         })
-        
-        
     }
     
     func cancelButtonClicked() {
@@ -242,23 +280,34 @@ extension ActionSheetView {
         }, completion: {(finished) in 
             
             self.removeFromSuperview()
+            
         })
-        
     }
-
 }
 
 
 extension UIColor {
-    
-    fileprivate convenience init(hex6: UInt32, alpha: Float = 1) {
+     convenience init(hex6: UInt32, alpha: Float = 1) {
         let divisor = CGFloat(255)
         let red     = CGFloat((hex6 & 0xFF0000) >> 16) / divisor
         let green   = CGFloat((hex6 & 0x00FF00) >> 8) / divisor
         let blue    = CGFloat((hex6 & 0x0000FF) >> 0) / divisor
         self.init(red: red, green: green, blue: blue, alpha: CGFloat(alpha))
     }
-    
 }
 
+extension UIImage {
+    
+    convenience init?(color: UIColor, size: CGSize = CGSize(width: 10, height: 10)) {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, UIScreen.main.scale)
+        
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        
+        self.init(cgImage:(UIGraphicsGetImageFromCurrentImageContext()?.cgImage!)!)
+        UIGraphicsEndImageContext()
+    }
 
+}

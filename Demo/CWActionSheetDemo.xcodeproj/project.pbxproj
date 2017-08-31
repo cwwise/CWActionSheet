@@ -15,6 +15,7 @@
 		1F51778F1F53B3B500503055 /* CWActionSheetDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F51778E1F53B3B500503055 /* CWActionSheetDemoTests.swift */; };
 		1FF3487A1F57EA2500BD0112 /* ActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF348781F57EA2500BD0112 /* ActionSheetCell.swift */; };
 		1FF3487B1F57EA2500BD0112 /* ActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF348791F57EA2500BD0112 /* ActionSheetView.swift */; };
+		1FF3487D1F58165B00BD0112 /* ActionSheetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3487C1F58165B00BD0112 /* ActionSheetConfig.swift */; };
 		5CBBE6F38576F537AE0AE9FA /* Pods_CWActionSheetDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C6BAAC069C1FFECCCEEE5F4 /* Pods_CWActionSheetDemoTests.framework */; };
 		88F0B86B7BBCC34D78491D82 /* Pods_CWActionSheetDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728836031F7F6F21DA0EC082 /* Pods_CWActionSheetDemo.framework */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		1F5177901F53B3B500503055 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FF348781F57EA2500BD0112 /* ActionSheetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetCell.swift; sourceTree = "<group>"; };
 		1FF348791F57EA2500BD0112 /* ActionSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetView.swift; sourceTree = "<group>"; };
+		1FF3487C1F58165B00BD0112 /* ActionSheetConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetConfig.swift; sourceTree = "<group>"; };
 		30B440DEB1CECD90D78CD575 /* Pods-CWActionSheetDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWActionSheetDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWActionSheetDemoTests/Pods-CWActionSheetDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		428DB6D99589B4643908FC14 /* Pods-CWActionSheetDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWActionSheetDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWActionSheetDemoTests/Pods-CWActionSheetDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		4C6BAAC069C1FFECCCEEE5F4 /* Pods_CWActionSheetDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWActionSheetDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +120,7 @@
 			children = (
 				1FF348791F57EA2500BD0112 /* ActionSheetView.swift */,
 				1FF348781F57EA2500BD0112 /* ActionSheetCell.swift */,
+				1FF3487C1F58165B00BD0112 /* ActionSheetConfig.swift */,
 			);
 			name = Sources;
 			path = ../../Sources;
@@ -352,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F51777C1F53B3B500503055 /* ViewController.swift in Sources */,
+				1FF3487D1F58165B00BD0112 /* ActionSheetConfig.swift in Sources */,
 				1FF3487A1F57EA2500BD0112 /* ActionSheetCell.swift in Sources */,
 				1FF3487B1F57EA2500BD0112 /* ActionSheetView.swift in Sources */,
 				1F51777A1F53B3B500503055 /* AppDelegate.swift in Sources */,

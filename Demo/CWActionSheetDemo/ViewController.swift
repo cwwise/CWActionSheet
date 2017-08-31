@@ -18,15 +18,19 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showAction(_ sender: UIButton) {
+        
         let titles: [String] = ["按钮1", "按钮2"]
         
         let clickedHandler = { (sheetView: ActionSheetView, index: Int) in
             print(index)
         }
-        let actionSheet = ActionSheetView(title: "测试标题", 
+        let title = "在大洋彼岸的美国芝加哥，又一场马拉松大满贯赛事－芝加哥马拉松落下帷幕，中国选手完赛人数再创新高，高达467人完赛"
+        let actionSheet = ActionSheetView(title: title,
                                           cancelButtonTitle: "取消",
                                           otherButtonTitles: titles,
                                           clickedHandler: clickedHandler)
+        actionSheet.destructiveButtonIndex = 0
+        
         actionSheet.show()
     }
     
