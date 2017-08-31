@@ -13,6 +13,9 @@
 		1F5177811F53B3B500503055 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5177801F53B3B500503055 /* Assets.xcassets */; };
 		1F5177841F53B3B500503055 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F5177821F53B3B500503055 /* LaunchScreen.storyboard */; };
 		1F51778F1F53B3B500503055 /* CWActionSheetDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F51778E1F53B3B500503055 /* CWActionSheetDemoTests.swift */; };
+		1FF348721F57B37000BD0112 /* ActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF348711F57B37000BD0112 /* ActionSheetCell.swift */; };
+		1FF348741F57B46A00BD0112 /* ActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF348731F57B46A00BD0112 /* ActionSheetView.swift */; };
+		1FF348761F57BA8700BD0112 /* ActionSheetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF348751F57BA8700BD0112 /* ActionSheetItem.swift */; };
 		5CBBE6F38576F537AE0AE9FA /* Pods_CWActionSheetDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C6BAAC069C1FFECCCEEE5F4 /* Pods_CWActionSheetDemoTests.framework */; };
 		88F0B86B7BBCC34D78491D82 /* Pods_CWActionSheetDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728836031F7F6F21DA0EC082 /* Pods_CWActionSheetDemo.framework */; };
 /* End PBXBuildFile section */
@@ -38,6 +41,9 @@
 		1F51778A1F53B3B500503055 /* CWActionSheetDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWActionSheetDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F51778E1F53B3B500503055 /* CWActionSheetDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWActionSheetDemoTests.swift; sourceTree = "<group>"; };
 		1F5177901F53B3B500503055 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1FF348711F57B37000BD0112 /* ActionSheetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetCell.swift; sourceTree = "<group>"; };
+		1FF348731F57B46A00BD0112 /* ActionSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetView.swift; sourceTree = "<group>"; };
+		1FF348751F57BA8700BD0112 /* ActionSheetItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetItem.swift; sourceTree = "<group>"; };
 		30B440DEB1CECD90D78CD575 /* Pods-CWActionSheetDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWActionSheetDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWActionSheetDemoTests/Pods-CWActionSheetDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		428DB6D99589B4643908FC14 /* Pods-CWActionSheetDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWActionSheetDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWActionSheetDemoTests/Pods-CWActionSheetDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		4C6BAAC069C1FFECCCEEE5F4 /* Pods_CWActionSheetDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWActionSheetDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +97,9 @@
 			children = (
 				1F5177791F53B3B500503055 /* AppDelegate.swift */,
 				1F51777B1F53B3B500503055 /* ViewController.swift */,
+				1FF348751F57BA8700BD0112 /* ActionSheetItem.swift */,
+				1FF348731F57B46A00BD0112 /* ActionSheetView.swift */,
+				1FF348711F57B37000BD0112 /* ActionSheetCell.swift */,
 				1F51777D1F53B3B500503055 /* Main.storyboard */,
 				1F5177801F53B3B500503055 /* Assets.xcassets */,
 				1F5177821F53B3B500503055 /* LaunchScreen.storyboard */,
@@ -336,8 +345,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF348761F57BA8700BD0112 /* ActionSheetItem.swift in Sources */,
 				1F51777C1F53B3B500503055 /* ViewController.swift in Sources */,
 				1F51777A1F53B3B500503055 /* AppDelegate.swift in Sources */,
+				1FF348721F57B37000BD0112 /* ActionSheetCell.swift in Sources */,
+				1FF348741F57B46A00BD0112 /* ActionSheetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +559,7 @@
 				1F5177951F53B3B500503055 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1F5177961F53B3B500503055 /* Build configuration list for PBXNativeTarget "CWActionSheetDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -555,6 +568,7 @@
 				1F5177981F53B3B500503055 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
