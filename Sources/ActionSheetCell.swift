@@ -18,17 +18,21 @@ class ActionSheetCell: UITableViewCell {
         return titleLabel
     }()
     
-    var lineLayer: CALayer!
-    
-    var separatorColor: UIColor!
-        
+    var lineLayer: CALayer = {
+        let lineLayer = CALayer()
+        return lineLayer
+    }()
+            
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.contentView.layer.addSublayer(lineLayer)
         self.contentView.addSubview(titleLabel)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        lineLayer.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: 1/UIScreen.main.scale)
         titleLabel.frame = CGRect(x: 0, y: 10, width: self.bounds.width, height: self.bounds.height-2*10)
     }
     

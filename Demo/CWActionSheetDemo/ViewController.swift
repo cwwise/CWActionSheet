@@ -19,7 +19,14 @@ class ViewController: UIViewController {
 
     @IBAction func showAction(_ sender: UIButton) {
         let titles: [String] = ["按钮1", "按钮2"]
-        let actionSheet = ActionSheetView(title: "测试标题", cancelButtonTitle: "取消", otherButtonTitles: titles)
+        
+        let clickedHandler = { (sheetView: ActionSheetView, index: Int) in
+            print(index)
+        }
+        let actionSheet = ActionSheetView(title: "测试标题", 
+                                          cancelButtonTitle: "取消",
+                                          otherButtonTitles: titles,
+                                          clickedHandler: clickedHandler)
         actionSheet.show()
     }
     

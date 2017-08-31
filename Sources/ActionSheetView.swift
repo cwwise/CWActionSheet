@@ -11,10 +11,11 @@ import UIKit
 private let kScreenHeight = UIScreen.main.bounds.height
 private let kScreenWidth = UIScreen.main.bounds.width
 
+public typealias ActionSheetClickedHandler = ((ActionSheetView, Int) -> Void)
+
 public class ActionSheetView: UIView {
 
     // MARK: 属性
-    
     /// 
     var title: String?
     ///
@@ -52,6 +53,9 @@ public class ActionSheetView: UIView {
     
     var otherButtonTitles: [String] = []
     
+    // 点击事件
+    var clickedHandler: ActionSheetClickedHandler?
+    
     convenience init() {
         let frame = UIScreen.main.bounds
         self.init(frame: frame)
@@ -59,13 +63,13 @@ public class ActionSheetView: UIView {
     
     override init(frame: CGRect) {
         
-        titleColor = UIColor.black
+        titleColor = UIColor(hex6: 0x888888)
         buttonColor = UIColor.black
         
         titleFont = UIFont.systemFont(ofSize: 14)
         buttonFont = UIFont.systemFont(ofSize: 17)
         
-        separatorColor = UIColor(hex6: 0x999999)
+        separatorColor = UIColor(hex6: 0xd9d9d9)
         
         titleLinesNumber = 0
         
@@ -77,11 +81,13 @@ public class ActionSheetView: UIView {
     
     public convenience init(title: String? = nil, 
                             cancelButtonTitle: String? = nil,
-                            otherButtonTitles: [String] = []) {
+                            otherButtonTitles: [String] = [],
+                            clickedHandler: ActionSheetClickedHandler? = nil) {
         self.init()
         self.title = title
         self.otherButtonTitles = otherButtonTitles
         self.cancelButtonTitle = cancelButtonTitle
+        self.clickedHandler = clickedHandler
     }
 
     
@@ -92,6 +98,8 @@ public class ActionSheetView: UIView {
     func setupUI() {
         
         backgroundView = UIView(frame: self.bounds)
+        backgroundView.backgroundColor = UIColor(hex6: 0x808080)
+        backgroundView.alpha = 0
         self.addSubview(backgroundView)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backgroundViewClicked))
@@ -109,6 +117,7 @@ public class ActionSheetView: UIView {
 
         tableView = UITableView(frame: CGRect.zero, style: .plain)
         tableView.delegate = self
+        tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.rowHeight = buttonHeight
         tableView.isScrollEnabled = false
@@ -116,10 +125,13 @@ public class ActionSheetView: UIView {
         containerView.addSubview(tableView)
         // 分割
         divisionLayer = CALayer()
+        divisionLayer.backgroundColor = UIColor(hex6: 0xECECED).cgColor
         containerView.layer.addSublayer(divisionLayer)
         
         // 
         cancelButton = UIButton(type: .custom)
+        cancelButton.titleLabel?.font = buttonFont
+        cancelButton.setTitleColor(buttonColor, for: .normal)
         cancelButton.addTarget(self, action: #selector(cancelButtonClicked), for: .touchUpInside)
         containerView.addSubview(cancelButton)
     }
@@ -180,12 +192,15 @@ extension ActionSheetView: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ActionSheetCell
         cell.titleLabel.text = otherButtonTitles[indexPath.row]
+        cell.titleLabel.font = buttonFont
+        cell.lineLayer.backgroundColor = separatorColor.cgColor
         return cell
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        self.clickedHandler?(self, indexPath.row)
+        cancelButtonClicked()
     }
     
 }
@@ -205,6 +220,8 @@ extension ActionSheetView {
             let frame = self.containerView.frame
             self.containerView.frame = frame.offsetBy(dx: 0, dy: -frame.height)
             
+            self.backgroundView.alpha = 0.3
+            
         }, completion: {(finished) in 
         
 
@@ -220,16 +237,15 @@ extension ActionSheetView {
             
             let frame = self.containerView.frame
             self.containerView.frame = frame.offsetBy(dx: 0, dy: frame.height)
+            self.backgroundView.alpha = 0.0
             
         }, completion: {(finished) in 
             
             self.removeFromSuperview()
         })
         
-        
     }
 
-    
 }
 
 
@@ -244,7 +260,5 @@ extension UIColor {
     }
     
 }
-
-
 
 
