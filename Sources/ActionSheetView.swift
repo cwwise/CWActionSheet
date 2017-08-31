@@ -11,58 +11,58 @@ import UIKit
 private let kScreenHeight = UIScreen.main.bounds.height
 private let kScreenWidth = UIScreen.main.bounds.width
 
+/// 点击回调
 public typealias ActionSheetClickedHandler = ((ActionSheetView, Int) -> Void)
 
 public class ActionSheetView: UIView {
-
     // MARK: 属性
-    /// 
+    /// 标题
     public var title: String?
-    ///
+    /// 取消按钮title
     public var cancelButtonTitle: String?
-    
+    /// 标题颜色 默认UIColor.black
     public var titleColor: UIColor
-    
+    /// 按钮文字颜色
     public var buttonColor: UIColor
-    
+    /// 标题字体 默认
     public var titleFont: UIFont
-    
+    /// 按钮字体
     public var buttonFont: UIFont
-    
+    /// 标题行数 默认为0，即不限制
     public var titleLinesNumber: Int
-    
+    /// 标题Insets
     public var titleEdgeInsets: UIEdgeInsets
-    
+    /// 按钮高度
     public var buttonHeight: CGFloat
     /// 动画时间
     public var animationDuration: TimeInterval
-    
+    /// 分割线颜色
     public var separatorColor: UIColor
-    
+    /// 按钮高亮颜色
     public var buttonHighlightdColor: UIColor
-    //
+    /// destructive按钮颜色
     public var destructiveButtonColor: UIColor
-    
+    /// destructive按钮位置
     public var destructiveButtonIndex: Int?
-        
+    /// 其他按钮标题
     public var otherButtonTitles: [String] = []
-    // 点击事件
+    /// 点击事件回调
     public var clickedHandler: ActionSheetClickedHandler?
-    // 命名待优化
+    /// 是否可以点击其他区域
     public var canTouchToDismiss: Bool
-    
-    fileprivate var tableView: UITableView!
-    
-    fileprivate var titleLabel: UILabel!
-    
+    /// 内容View
     fileprivate var containerView: UIView!
-    // 背景
+    /// 标题
+    fileprivate var titleLabel: UILabel!
+    /// 其他按钮tableView
+    fileprivate var tableView: UITableView!
+    /// 背景
     fileprivate var backgroundView: UIView!
-    
+    /// 分割layer
     private var divisionLayer: CALayer!
-    
+    /// 取消按钮
     private var cancelButton: UIButton!
-
+    /// 默认配置
     private var config: ActionSheetConfig = ActionSheetConfig.default
     
     convenience init() {
@@ -94,6 +94,13 @@ public class ActionSheetView: UIView {
         setupUI()
     }
     
+    /// 初始化方法
+    ///
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - cancelButtonTitle: 取消按钮标题
+    ///   - otherButtonTitles: 其他按钮数组
+    ///   - clickedHandler: 点击事件回调
     public convenience init(title: String? = nil, 
                             cancelButtonTitle: String? = nil,
                             otherButtonTitles: [String] = [],
@@ -105,7 +112,6 @@ public class ActionSheetView: UIView {
         self.clickedHandler = clickedHandler
     }
 
-    
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -130,6 +136,7 @@ public class ActionSheetView: UIView {
         titleLabel.textAlignment = .center
         containerView.addSubview(titleLabel)
 
+        //
         tableView = UITableView(frame: CGRect.zero, style: .plain)
         tableView.delegate = self
         tableView.separatorStyle = .none
@@ -138,12 +145,13 @@ public class ActionSheetView: UIView {
         tableView.isScrollEnabled = false
         tableView.register(ActionSheetCell.self, forCellReuseIdentifier: "cell")
         containerView.addSubview(tableView)
-        // 分割
+        
+        // 分割线
         divisionLayer = CALayer()
         divisionLayer.backgroundColor = UIColor(hex6: 0xededee).cgColor
         containerView.layer.addSublayer(divisionLayer)
         
-        // 
+        // 取消按钮
         cancelButton = UIButton(type: .custom)
         cancelButton.titleLabel?.font = buttonFont
         cancelButton.setTitleColor(buttonColor, for: .normal)
@@ -152,9 +160,9 @@ public class ActionSheetView: UIView {
         containerView.addSubview(cancelButton)
     }
     
+    /// 计算
     func setupView() {
         
-        // 依次计算
         titleLabel.numberOfLines = titleLinesNumber
         titleLabel.text = title
         
@@ -183,7 +191,6 @@ public class ActionSheetView: UIView {
         divisionLayer.frame = CGRect(x: 0, y: tableView.frame.maxY,
                                      width: kScreenWidth, height: divisionViewHeight)
         
-        
         cancelButton.setTitle(cancelButtonTitle, for: .normal)
         if cancelButtonTitle != nil {
             cancelButton.frame = CGRect(x: 0, y: divisionLayer.frame.maxY,
@@ -192,33 +199,53 @@ public class ActionSheetView: UIView {
             cancelButton.frame = CGRect(x: 0, y: divisionLayer.frame.maxY,
                                         width: kScreenWidth, height: 0)
         }
-       
         
         containerView.frame = CGRect(x: 0, y: kScreenHeight - cancelButton.frame.maxY,
                                      width: kScreenWidth, height: cancelButton.frame.maxY)
     }
     
     
-    // MARK: 
-    func append(_ buttonTitle: String, at index: Int = -1) {
-       
-        // 默认值 添加到最后面
-        if index == -1 {
-            
-        } else {
-            
-            
-            
-        }
-        
+    // MARK:
+    public func append(buttonTitles: [String]) {
+        otherButtonTitles.append(contentsOf: buttonTitles)
+        tableView.reloadData()
+        setupView()
     }
     
-    func append(buttonTitles: [String], at index: Int) {
-        setupView()
+    public func insert(buttonTitles: [String], at index: Int) {
+        otherButtonTitles.insert(contentsOf: buttonTitles, at: index)
         tableView.reloadData()
+        setupView()
     }
     
     func backgroundViewClicked() {
+        cancelButtonClicked()
+    }
+    
+    /// 显示ActionSheetView
+    public func show() {
+
+        let keyWindow = UIApplication.shared.keyWindow!
+        keyWindow.addSubview(self)
+        
+        setupView()
+        containerView.frame = containerView.frame.offsetBy(dx: 0, dy: containerView.frame.height)
+        
+        UIView.animate(withDuration: animationDuration, delay: 0, options: .curveEaseOut, animations: {
+            
+            let frame = self.containerView.frame
+            self.containerView.frame = frame.offsetBy(dx: 0, dy: -frame.height)
+            self.backgroundView.alpha = 0.3
+            
+        }, completion: {(finished) in
+            
+            self.backgroundView.isUserInteractionEnabled = self.canTouchToDismiss
+            
+        })
+    }
+    
+    /// 隐藏ActionSheetView
+    public func hide() {
         cancelButtonClicked()
     }
     
@@ -251,35 +278,20 @@ extension ActionSheetView: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        self.clickedHandler?(self, indexPath.row)
-        cancelButtonClicked()
+        self.clickedHandler?(self, indexPath.row+1)
+        hideWithButtonIndex(indexPath.row+1)
     }
     
 }
 
 extension ActionSheetView {
     
-    public func show() {
-        // 添加到window上
-        let keyWindow = UIApplication.shared.keyWindow!
-        keyWindow.addSubview(self)
-        
-        setupView()
-        containerView.frame = containerView.frame.offsetBy(dx: 0, dy: containerView.frame.height)
-        
-        UIView.animate(withDuration: animationDuration, delay: 0, options: .curveEaseOut, animations: { 
-            
-            let frame = self.containerView.frame
-            self.containerView.frame = frame.offsetBy(dx: 0, dy: -frame.height)
-            self.backgroundView.alpha = 0.3
-            
-        }, completion: {(finished) in 
-            
-            self.backgroundView.isUserInteractionEnabled = self.canTouchToDismiss
-        })
+    func cancelButtonClicked() {
+        self.clickedHandler?(self, 0)
+        hideWithButtonIndex(0)
     }
     
-    func cancelButtonClicked() {
+    func hideWithButtonIndex(_ index: Int) {
         
         UIView.animate(withDuration: animationDuration, delay: 0, options: .curveEaseOut, animations: { 
             
@@ -287,7 +299,7 @@ extension ActionSheetView {
             self.containerView.frame = frame.offsetBy(dx: 0, dy: frame.height)
             self.backgroundView.alpha = 0.0
             
-        }, completion: {(finished) in 
+        }, completion: {(finished) in
             
             self.removeFromSuperview()
             

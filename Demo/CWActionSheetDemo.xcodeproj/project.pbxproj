@@ -177,8 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				8CA924E51F58507200570846 /* ActionSheetConfig.swift */,
-				8CA924E61F58507200570846 /* ActionSheetCell.swift */,
 				8CA924E71F58507200570846 /* ActionSheetView.swift */,
+				8CA924E61F58507200570846 /* ActionSheetCell.swift */,
 				8CA924E81F58507200570846 /* CWActionSheet.h */,
 			);
 			name = Sources;

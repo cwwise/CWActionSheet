@@ -16,7 +16,7 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        demoList = ["默认样式", "无title", "多行title", "无取消按钮"]
+        demoList = ["默认样式", "无title", "多行title", "无取消按钮", "动态添加"]
         self.tableView.tableFooterView = UIView()
     }
 
@@ -38,15 +38,6 @@ class ViewController: UITableViewController {
         let clickedHandler = { (sheetView: ActionSheetView, index: Int) in
             print("点击\(index)")
         }
-  
-        let title = "删除后，将清空该群聊的消息记录"
-        let actionSheet = ActionSheetView(title: title,
-                                          cancelButtonTitle: "取消",
-                                          otherButtonTitles: ["删除"],
-                                          clickedHandler: clickedHandler)
-        actionSheet.destructiveButtonIndex = 0
-        actionSheet.show()
-        
         
         switch indexPath.row {
         case 1:
@@ -70,6 +61,20 @@ class ViewController: UITableViewController {
                                               otherButtonTitles: ["确定","稍等"],
                                               clickedHandler: clickedHandler)
             actionSheet.show()
+    
+        case 4:
+            
+            let title = "这是一条提示,过2秒会添加两条"
+            let actionSheet = ActionSheetView(title: title,
+                                              cancelButtonTitle: "取消",
+                                              otherButtonTitles: ["确定","稍等"],
+                                              clickedHandler: clickedHandler)
+            DispatchQueue.main.asyncAfter(deadline: .now()+4, execute: {
+                actionSheet.insert(buttonTitles: ["测试按钮1", "测试按钮2"], at: 0)
+                //actionSheet.append(buttonTitles: ["测试按钮1", "测试按钮2"])
+            })
+            actionSheet.show()
+            
             
         default:
             let title = "删除后，将清空该群聊的消息记录"

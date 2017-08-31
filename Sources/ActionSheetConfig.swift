@@ -8,36 +8,37 @@
 
 import UIKit
 
+/// ActionSheetView配置
 public class ActionSheetConfig {
     
     public static let `default` = ActionSheetConfig()
-
-    ///
+    // MARK: 属性
+    /// 取消按钮title
     public var cancelButtonTitle: String?
-    
+    /// 标题颜色 默认0x888888
     public var titleColor: UIColor
-    
+    /// 按钮文字颜色
     public var buttonColor: UIColor
-    
+    /// 标题字体 默认 `[UIFont systemFontOfSize:14.0f]`
     public var titleFont: UIFont
-    
+    /// 按钮字体 默认 `[UIFont systemFontOfSize:17.0f]`
     public var buttonFont: UIFont
-    
+    /// 标题行数 默认为0，即不限制
     public var titleLinesNumber: Int
-    
+    /// 标题Insets
     public var titleEdgeInsets: UIEdgeInsets
-    
+    /// 按钮高度
     public var buttonHeight: CGFloat
     /// 动画时间
     public var animationDuration: TimeInterval
-    
+    /// 分割线颜色
     public var separatorColor: UIColor
-    
+    /// 按钮高亮颜色
     public var buttonHighlightdColor: UIColor
-
-    public var canTouchToDismiss: Bool
-    //
+    /// destructive按钮颜色
     public var destructiveButtonColor: UIColor
+    /// 是否可以点击其他区域
+    public var canTouchToDismiss: Bool
     
     private init() {
         
