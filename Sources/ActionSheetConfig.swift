@@ -9,31 +9,37 @@
 import UIKit
 
 public class ActionSheetConfig {
-        
+    
+    public static let `default` = ActionSheetConfig()
+
     ///
-    var cancelButtonTitle: String?
+    public var cancelButtonTitle: String?
     
-    var titleColor: UIColor
+    public var titleColor: UIColor
     
-    var buttonColor: UIColor
+    public var buttonColor: UIColor
     
-    var titleFont: UIFont
+    public var titleFont: UIFont
     
-    var buttonFont: UIFont
+    public var buttonFont: UIFont
     
-    var titleLinesNumber: Int
+    public var titleLinesNumber: Int
     
-    var titleEdgeInsets: UIEdgeInsets
+    public var titleEdgeInsets: UIEdgeInsets
     
-    var buttonHeight: CGFloat
+    public var buttonHeight: CGFloat
     /// 动画时间
-    var animationDuration: TimeInterval
+    public var animationDuration: TimeInterval
     
-    var separatorColor: UIColor
-    // #E44545
-    var destructiveButtonColor: UIColor
+    public var separatorColor: UIColor
     
-    init() {
+    public var buttonHighlightdColor: UIColor
+
+    public var canTouchToDismiss: Bool
+    //
+    public var destructiveButtonColor: UIColor
+    
+    private init() {
         
         titleColor = UIColor(hex6: 0x888888)
         buttonColor = UIColor.black
@@ -42,11 +48,13 @@ public class ActionSheetConfig {
         separatorColor = UIColor(hex6: 0xd9d9d9)
         destructiveButtonColor = UIColor(hex6: 0xE44545)
         
-        buttonHeight = 49.0
+        buttonHeight = 50.0
         animationDuration = 0.3
         titleLinesNumber = 0
         titleEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         
+        canTouchToDismiss = true
+        buttonHighlightdColor = UIColor(hex6: 0xf7f7f7)
     }
     
 }

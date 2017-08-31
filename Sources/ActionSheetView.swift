@@ -12,62 +12,59 @@ private let kScreenHeight = UIScreen.main.bounds.height
 private let kScreenWidth = UIScreen.main.bounds.width
 
 public typealias ActionSheetClickedHandler = ((ActionSheetView, Int) -> Void)
-public typealias ActionSheetShowHandler = ((ActionSheetView) -> Void)
 
 public class ActionSheetView: UIView {
 
     // MARK: 属性
     /// 
-    var title: String?
+    public var title: String?
     ///
-    var cancelButtonTitle: String?
+    public var cancelButtonTitle: String?
     
-    var titleColor: UIColor
+    public var titleColor: UIColor
     
-    var buttonColor: UIColor
+    public var buttonColor: UIColor
     
-    var titleFont: UIFont
+    public var titleFont: UIFont
     
-    var buttonFont: UIFont
+    public var buttonFont: UIFont
     
-    var titleLinesNumber: Int
+    public var titleLinesNumber: Int
     
-    var titleEdgeInsets: UIEdgeInsets
+    public var titleEdgeInsets: UIEdgeInsets
     
-    var buttonHeight: CGFloat
+    public var buttonHeight: CGFloat
     /// 动画时间
-    var animationDuration: TimeInterval
+    public var animationDuration: TimeInterval
     
-    var separatorColor: UIColor
-    // #E44545
-    var destructiveButtonColor: UIColor
+    public var separatorColor: UIColor
     
-    var destructiveButtonIndex: Int?
+    public var buttonHighlightdColor: UIColor
+    //
+    public var destructiveButtonColor: UIColor
+    
+    public var destructiveButtonIndex: Int?
         
-    var otherButtonTitles: [String] = []
+    public var otherButtonTitles: [String] = []
     // 点击事件
     public var clickedHandler: ActionSheetClickedHandler?
-    
-    public var didPresentHandler: ActionSheetShowHandler?
-    
-    public var willPresentHandler: ActionSheetShowHandler?
-    
-    public var willDismissHandler: ActionSheetShowHandler?
-    
-    public var didDismissHandler: ActionSheetShowHandler?
+    // 命名待优化
+    public var canTouchToDismiss: Bool
     
     fileprivate var tableView: UITableView!
     
-    var titleLabel: UILabel!
+    fileprivate var titleLabel: UILabel!
     
-    var containerView: UIView!
+    fileprivate var containerView: UIView!
     // 背景
-    var backgroundView: UIView!
+    fileprivate var backgroundView: UIView!
     
-    var divisionLayer: CALayer!
+    private var divisionLayer: CALayer!
     
-    var cancelButton: UIButton!
+    private var cancelButton: UIButton!
 
+    private var config: ActionSheetConfig = ActionSheetConfig.default
+    
     convenience init() {
         let frame = UIScreen.main.bounds
         self.init(frame: frame)
@@ -75,22 +72,25 @@ public class ActionSheetView: UIView {
     
     override init(frame: CGRect) {
         
-        titleColor = UIColor(hex6: 0x888888)
-        buttonColor = UIColor.black
-        titleFont = UIFont.systemFont(ofSize: 14)
-        buttonFont = UIFont.systemFont(ofSize: 17)
-        separatorColor = UIColor(hex6: 0xd9d9d9)
-        destructiveButtonColor = UIColor(hex6: 0xE44545)
+        cancelButtonTitle = config.cancelButtonTitle
+        titleColor = config.titleColor
+        buttonColor = config.buttonColor
+        titleFont = config.titleFont
+        buttonFont = config.buttonFont
         
-        buttonHeight = 49.0
-        animationDuration = 0.3
-        titleLinesNumber = 0
-        titleEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        separatorColor = config.separatorColor
+        destructiveButtonColor = config.destructiveButtonColor
+        buttonHeight = config.buttonHeight
+        animationDuration = config.animationDuration
+        titleLinesNumber = config.titleLinesNumber
+        titleEdgeInsets = config.titleEdgeInsets
+        
+        buttonHighlightdColor = config.buttonHighlightdColor
+        
+        canTouchToDismiss = config.canTouchToDismiss
         
         super.init(frame: frame)
-        
-        let tintColor = UIColor(hex6: 0xf7f7f7)
-        self.tintColor = tintColor
+    
         setupUI()
     }
     
@@ -115,14 +115,14 @@ public class ActionSheetView: UIView {
         backgroundView = UIView(frame: self.bounds)
         backgroundView.backgroundColor = UIColor(hex6: 0x808080)
         backgroundView.alpha = 0
-        self.addSubview(backgroundView)
+        addSubview(backgroundView)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backgroundViewClicked))
         backgroundView.addGestureRecognizer(tapGesture)
         
         containerView = UIView()
         containerView.backgroundColor = UIColor.white
-        self.addSubview(containerView)
+        addSubview(containerView)
         
         titleLabel = UILabel()
         titleLabel.font = titleFont
@@ -140,14 +140,14 @@ public class ActionSheetView: UIView {
         containerView.addSubview(tableView)
         // 分割
         divisionLayer = CALayer()
-        divisionLayer.backgroundColor = UIColor(hex6: 0xECECED).cgColor
+        divisionLayer.backgroundColor = UIColor(hex6: 0xededee).cgColor
         containerView.layer.addSublayer(divisionLayer)
         
         // 
         cancelButton = UIButton(type: .custom)
         cancelButton.titleLabel?.font = buttonFont
         cancelButton.setTitleColor(buttonColor, for: .normal)
-        cancelButton.setBackgroundImage(UIImage(color: self.tintColor), for: .highlighted)
+        cancelButton.setBackgroundImage(UIImage(color: buttonHighlightdColor), for: .highlighted)
         cancelButton.addTarget(self, action: #selector(cancelButtonClicked), for: .touchUpInside)
         containerView.addSubview(cancelButton)
     }
@@ -158,18 +158,24 @@ public class ActionSheetView: UIView {
         titleLabel.numberOfLines = titleLinesNumber
         titleLabel.text = title
         
-        let titleWidth = kScreenWidth - titleEdgeInsets.left - titleEdgeInsets.right
-        let size = CGSize(width: titleWidth,
-                          height: CGFloat.greatestFiniteMagnitude)
-        var titleSize = titleLabel.sizeThatFits(size)
-        titleSize = CGSize(width: titleWidth, height: ceil(titleSize.height)+1)
-        
-        titleLabel.frame = CGRect(x: titleEdgeInsets.left, y: titleEdgeInsets.top, 
-                                  width: titleSize.width, height: titleSize.height)
+        var titleEdgeInsetsBottom = titleEdgeInsets.bottom
+        if title != nil {
+            let titleWidth = kScreenWidth - titleEdgeInsets.left - titleEdgeInsets.right
+            let size = CGSize(width: titleWidth,
+                              height: CGFloat.greatestFiniteMagnitude)
+            var titleSize = titleLabel.sizeThatFits(size)
+            titleSize = CGSize(width: titleWidth, height: ceil(titleSize.height)+1)
+            
+            titleLabel.frame = CGRect(x: titleEdgeInsets.left, y: titleEdgeInsets.top,
+                                      width: titleSize.width, height: titleSize.height)
+        } else {
+            titleLabel.frame = CGRect.zero
+            titleEdgeInsetsBottom = 0
+        }
         
         // layout tableView
         let tableViewHeight = CGFloat(otherButtonTitles.count) * buttonHeight
-        tableView.frame = CGRect(x: 0, y: titleLabel.frame.maxY+titleEdgeInsets.bottom,
+        tableView.frame = CGRect(x: 0, y: titleLabel.frame.maxY+titleEdgeInsetsBottom,
                                  width: kScreenWidth, height: tableViewHeight)
         
         // 
@@ -177,9 +183,16 @@ public class ActionSheetView: UIView {
         divisionLayer.frame = CGRect(x: 0, y: tableView.frame.maxY,
                                      width: kScreenWidth, height: divisionViewHeight)
         
+        
         cancelButton.setTitle(cancelButtonTitle, for: .normal)
-        cancelButton.frame = CGRect(x: 0, y: divisionLayer.frame.maxY, 
-                                    width: kScreenWidth, height: buttonHeight)
+        if cancelButtonTitle != nil {
+            cancelButton.frame = CGRect(x: 0, y: divisionLayer.frame.maxY,
+                                        width: kScreenWidth, height: buttonHeight)
+        } else {
+            cancelButton.frame = CGRect(x: 0, y: divisionLayer.frame.maxY,
+                                        width: kScreenWidth, height: 0)
+        }
+       
         
         containerView.frame = CGRect(x: 0, y: kScreenHeight - cancelButton.frame.maxY,
                                      width: kScreenWidth, height: cancelButton.frame.maxY)
@@ -216,10 +229,6 @@ public class ActionSheetView: UIView {
 }
 
 extension ActionSheetView: UITableViewDelegate, UITableViewDataSource {
-
-    public func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return otherButtonTitles.count
@@ -230,7 +239,7 @@ extension ActionSheetView: UITableViewDelegate, UITableViewDataSource {
         cell.titleLabel.font = buttonFont
         cell.lineLayer.backgroundColor = separatorColor.cgColor
         cell.titleLabel.text = otherButtonTitles[indexPath.row]
-        cell.selectedBackgroundView?.backgroundColor = self.tintColor  
+        cell.selectedBackgroundView?.backgroundColor = self.buttonHighlightdColor
 
         if indexPath.row == destructiveButtonIndex {
             cell.titleLabel.textColor = destructiveButtonColor
@@ -266,6 +275,7 @@ extension ActionSheetView {
             
         }, completion: {(finished) in 
             
+            self.backgroundView.isUserInteractionEnabled = self.canTouchToDismiss
         })
     }
     
