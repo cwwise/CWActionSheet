@@ -1,0 +1,20 @@
+osx_image: xcode8.3
+language: swift
+
+env:
+  global:
+    - LANG=en_US.UTF-8
+    - LC_ALL=en_US.UTF-8
+    - XCODE_PROJECT=./Demo/CWActionSheetDemo.xcodeproj
+  matrix:
+    - SCHEME="CWActionSheetDemo"
+
+before_install:
+  - gem install xcpretty --quiet
+
+script:
+  - set -o pipefail
+  - xcodebuild -project "$XCODE_PROJECT" -scheme "$SCHEME" -configuration Release clean build | xcpretty -c
+
+after_success:
+  - sleep 5

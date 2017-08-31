@@ -39,6 +39,13 @@ class ViewController: UITableViewController {
             print("点击\(index)")
         }
   
+        let title = "删除后，将清空该群聊的消息记录"
+        let actionSheet = ActionSheetView(title: title,
+                                          cancelButtonTitle: "取消",
+                                          otherButtonTitles: ["删除"],
+                                          clickedHandler: clickedHandler)
+        actionSheet.destructiveButtonIndex = 0
+        actionSheet.show()
         
         
         switch indexPath.row {
