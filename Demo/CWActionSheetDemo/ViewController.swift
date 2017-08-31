@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CWActionSheet
 
 class ViewController: UITableViewController {
 

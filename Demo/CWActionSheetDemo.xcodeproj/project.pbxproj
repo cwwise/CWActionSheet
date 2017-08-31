@@ -13,9 +13,13 @@
 		8CA924A21F58472F00570846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA924A11F58472F00570846 /* Assets.xcassets */; };
 		8CA924A51F58472F00570846 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CA924A31F58472F00570846 /* LaunchScreen.storyboard */; };
 		8CA924B01F58472F00570846 /* CWActionSheetDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA924AF1F58472F00570846 /* CWActionSheetDemoTests.swift */; };
-		8CA924BE1F5847CB00570846 /* ActionSheetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA924BB1F5847CB00570846 /* ActionSheetConfig.swift */; };
-		8CA924BF1F5847CB00570846 /* ActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA924BC1F5847CB00570846 /* ActionSheetCell.swift */; };
-		8CA924C01F5847CB00570846 /* ActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA924BD1F5847CB00570846 /* ActionSheetView.swift */; };
+		8CA924CF1F584FF600570846 /* CWActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA924C61F584FF500570846 /* CWActionSheet.framework */; };
+		8CA924DB1F584FF600570846 /* CWActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA924C61F584FF500570846 /* CWActionSheet.framework */; };
+		8CA924DC1F584FF600570846 /* CWActionSheet.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA924C61F584FF500570846 /* CWActionSheet.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8CA924E91F58507200570846 /* ActionSheetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA924E51F58507200570846 /* ActionSheetConfig.swift */; };
+		8CA924EA1F58507200570846 /* ActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA924E61F58507200570846 /* ActionSheetCell.swift */; };
+		8CA924EB1F58507200570846 /* ActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA924E71F58507200570846 /* ActionSheetView.swift */; };
+		8CA924EC1F58507200570846 /* CWActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CA924E81F58507200570846 /* CWActionSheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,7 +30,42 @@
 			remoteGlobalIDString = 8CA924961F58472F00570846;
 			remoteInfo = CWActionSheetDemo;
 		};
+		8CA924D01F584FF600570846 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8CA9248F1F58472F00570846 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CA924C51F584FF500570846;
+			remoteInfo = CWActionSheet;
+		};
+		8CA924D21F584FF600570846 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8CA9248F1F58472F00570846 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CA924961F58472F00570846;
+			remoteInfo = CWActionSheetDemo;
+		};
+		8CA924D91F584FF600570846 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8CA9248F1F58472F00570846 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CA924C51F584FF500570846;
+			remoteInfo = CWActionSheet;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8CA924E21F584FF600570846 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8CA924DC1F584FF600570846 /* CWActionSheet.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8CA924971F58472F00570846 /* CWActionSheetDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWActionSheetDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,9 +78,13 @@
 		8CA924AB1F58472F00570846 /* CWActionSheetDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWActionSheetDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA924AF1F58472F00570846 /* CWActionSheetDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWActionSheetDemoTests.swift; sourceTree = "<group>"; };
 		8CA924B11F58472F00570846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8CA924BB1F5847CB00570846 /* ActionSheetConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetConfig.swift; sourceTree = "<group>"; };
-		8CA924BC1F5847CB00570846 /* ActionSheetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetCell.swift; sourceTree = "<group>"; };
-		8CA924BD1F5847CB00570846 /* ActionSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetView.swift; sourceTree = "<group>"; };
+		8CA924C61F584FF500570846 /* CWActionSheet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CWActionSheet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CA924C91F584FF500570846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CA924CE1F584FF600570846 /* CWActionSheetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWActionSheetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CA924E51F58507200570846 /* ActionSheetConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetConfig.swift; sourceTree = "<group>"; };
+		8CA924E61F58507200570846 /* ActionSheetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetCell.swift; sourceTree = "<group>"; };
+		8CA924E71F58507200570846 /* ActionSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetView.swift; sourceTree = "<group>"; };
+		8CA924E81F58507200570846 /* CWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWActionSheet.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CA924DB1F584FF600570846 /* CWActionSheet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +100,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CA924C21F584FF500570846 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CA924CB1F584FF600570846 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CA924CF1F584FF600570846 /* CWActionSheet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +126,7 @@
 			children = (
 				8CA924991F58472F00570846 /* CWActionSheetDemo */,
 				8CA924AE1F58472F00570846 /* CWActionSheetDemoTests */,
+				8CA924C71F584FF500570846 /* CWActionSheet */,
 				8CA924981F58472F00570846 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -76,6 +136,8 @@
 			children = (
 				8CA924971F58472F00570846 /* CWActionSheetDemo.app */,
 				8CA924AB1F58472F00570846 /* CWActionSheetDemoTests.xctest */,
+				8CA924C61F584FF500570846 /* CWActionSheet.framework */,
+				8CA924CE1F584FF600570846 /* CWActionSheetTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,7 +147,6 @@
 			children = (
 				8CA9249A1F58472F00570846 /* AppDelegate.swift */,
 				8CA9249C1F58472F00570846 /* ViewController.swift */,
-				8CA924BA1F5847CB00570846 /* Sources */,
 				8CA9249E1F58472F00570846 /* Main.storyboard */,
 				8CA924A11F58472F00570846 /* Assets.xcassets */,
 				8CA924A31F58472F00570846 /* LaunchScreen.storyboard */,
@@ -103,18 +164,39 @@
 			path = CWActionSheetDemoTests;
 			sourceTree = "<group>";
 		};
-		8CA924BA1F5847CB00570846 /* Sources */ = {
+		8CA924C71F584FF500570846 /* CWActionSheet */ = {
 			isa = PBXGroup;
 			children = (
-				8CA924BB1F5847CB00570846 /* ActionSheetConfig.swift */,
-				8CA924BC1F5847CB00570846 /* ActionSheetCell.swift */,
-				8CA924BD1F5847CB00570846 /* ActionSheetView.swift */,
+				8CA924E41F58507200570846 /* Sources */,
+				8CA924C91F584FF500570846 /* Info.plist */,
+			);
+			path = CWActionSheet;
+			sourceTree = "<group>";
+		};
+		8CA924E41F58507200570846 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				8CA924E51F58507200570846 /* ActionSheetConfig.swift */,
+				8CA924E61F58507200570846 /* ActionSheetCell.swift */,
+				8CA924E71F58507200570846 /* ActionSheetView.swift */,
+				8CA924E81F58507200570846 /* CWActionSheet.h */,
 			);
 			name = Sources;
 			path = ../../Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8CA924C31F584FF500570846 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CA924EC1F58507200570846 /* CWActionSheet.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		8CA924961F58472F00570846 /* CWActionSheetDemo */ = {
@@ -124,10 +206,12 @@
 				8CA924931F58472F00570846 /* Sources */,
 				8CA924941F58472F00570846 /* Frameworks */,
 				8CA924951F58472F00570846 /* Resources */,
+				8CA924E21F584FF600570846 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8CA924DA1F584FF600570846 /* PBXTargetDependency */,
 			);
 			name = CWActionSheetDemo;
 			productName = CWActionSheetDemo;
@@ -152,6 +236,43 @@
 			productReference = 8CA924AB1F58472F00570846 /* CWActionSheetDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		8CA924C51F584FF500570846 /* CWActionSheet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CA924E11F584FF600570846 /* Build configuration list for PBXNativeTarget "CWActionSheet" */;
+			buildPhases = (
+				8CA924C11F584FF500570846 /* Sources */,
+				8CA924C21F584FF500570846 /* Frameworks */,
+				8CA924C31F584FF500570846 /* Headers */,
+				8CA924C41F584FF500570846 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CWActionSheet;
+			productName = CWActionSheet;
+			productReference = 8CA924C61F584FF500570846 /* CWActionSheet.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8CA924CD1F584FF600570846 /* CWActionSheetTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CA924E31F584FF600570846 /* Build configuration list for PBXNativeTarget "CWActionSheetTests" */;
+			buildPhases = (
+				8CA924CA1F584FF600570846 /* Sources */,
+				8CA924CB1F584FF600570846 /* Frameworks */,
+				8CA924CC1F584FF600570846 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8CA924D11F584FF600570846 /* PBXTargetDependency */,
+				8CA924D31F584FF600570846 /* PBXTargetDependency */,
+			);
+			name = CWActionSheetTests;
+			productName = CWActionSheetTests;
+			productReference = 8CA924CE1F584FF600570846 /* CWActionSheetTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -168,6 +289,17 @@
 						ProvisioningStyle = Automatic;
 					};
 					8CA924AA1F58472F00570846 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = UEL43GU3G3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8CA924961F58472F00570846;
+					};
+					8CA924C51F584FF500570846 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = UEL43GU3G3;
+						ProvisioningStyle = Automatic;
+					};
+					8CA924CD1F584FF600570846 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = UEL43GU3G3;
 						ProvisioningStyle = Automatic;
@@ -190,6 +322,8 @@
 			targets = (
 				8CA924961F58472F00570846 /* CWActionSheetDemo */,
 				8CA924AA1F58472F00570846 /* CWActionSheetDemoTests */,
+				8CA924C51F584FF500570846 /* CWActionSheet */,
+				8CA924CD1F584FF600570846 /* CWActionSheetTests */,
 			);
 		};
 /* End PBXProject section */
@@ -212,6 +346,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8CA924C41F584FF500570846 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CA924CC1F584FF600570846 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -220,10 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CA9249D1F58472F00570846 /* ViewController.swift in Sources */,
-				8CA924BE1F5847CB00570846 /* ActionSheetConfig.swift in Sources */,
 				8CA9249B1F58472F00570846 /* AppDelegate.swift in Sources */,
-				8CA924BF1F5847CB00570846 /* ActionSheetCell.swift in Sources */,
-				8CA924C01F5847CB00570846 /* ActionSheetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +380,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8CA924C11F584FF500570846 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CA924E91F58507200570846 /* ActionSheetConfig.swift in Sources */,
+				8CA924EB1F58507200570846 /* ActionSheetView.swift in Sources */,
+				8CA924EA1F58507200570846 /* ActionSheetCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CA924CA1F584FF600570846 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -242,6 +404,21 @@
 			isa = PBXTargetDependency;
 			target = 8CA924961F58472F00570846 /* CWActionSheetDemo */;
 			targetProxy = 8CA924AC1F58472F00570846 /* PBXContainerItemProxy */;
+		};
+		8CA924D11F584FF600570846 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CA924C51F584FF500570846 /* CWActionSheet */;
+			targetProxy = 8CA924D01F584FF600570846 /* PBXContainerItemProxy */;
+		};
+		8CA924D31F584FF600570846 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CA924961F58472F00570846 /* CWActionSheetDemo */;
+			targetProxy = 8CA924D21F584FF600570846 /* PBXContainerItemProxy */;
+		};
+		8CA924DA1F584FF600570846 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CA924C51F584FF500570846 /* CWActionSheet */;
+			targetProxy = 8CA924D91F584FF600570846 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -361,6 +538,7 @@
 		8CA924B51F58472F00570846 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UEL43GU3G3;
 				INFOPLIST_FILE = CWActionSheetDemo/Info.plist;
@@ -374,6 +552,7 @@
 		8CA924B61F58472F00570846 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UEL43GU3G3;
 				INFOPLIST_FILE = CWActionSheetDemo/Info.plist;
@@ -414,6 +593,80 @@
 			};
 			name = Release;
 		};
+		8CA924DD1F584FF600570846 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = UEL43GU3G3;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CWActionSheet/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cwwise.CWActionSheet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8CA924DE1F584FF600570846 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = UEL43GU3G3;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CWActionSheet/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cwwise.CWActionSheet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8CA924DF1F584FF600570846 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = UEL43GU3G3;
+				INFOPLIST_FILE = CWActionSheetTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cwwise.CWActionSheetTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CWActionSheetDemo.app/CWActionSheetDemo";
+			};
+			name = Debug;
+		};
+		8CA924E01F584FF600570846 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = UEL43GU3G3;
+				INFOPLIST_FILE = CWActionSheetTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cwwise.CWActionSheetTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CWActionSheetDemo.app/CWActionSheetDemo";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -443,6 +696,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		8CA924E11F584FF600570846 /* Build configuration list for PBXNativeTarget "CWActionSheet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CA924DD1F584FF600570846 /* Debug */,
+				8CA924DE1F584FF600570846 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8CA924E31F584FF600570846 /* Build configuration list for PBXNativeTarget "CWActionSheetTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CA924DF1F584FF600570846 /* Debug */,
+				8CA924E01F584FF600570846 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
