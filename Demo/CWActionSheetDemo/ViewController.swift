@@ -15,8 +15,7 @@ class ViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        demoList = ["默认样式", "无title", "多行title", "无取消按钮", "动态添加"]
+        demoList = ["默认样式", "无title", "多行title", "无取消按钮", "动态添加", "多个按钮"]
         self.tableView.tableFooterView = UIView()
     }
 
@@ -53,6 +52,7 @@ class ViewController: UITableViewController {
                                               cancelButtonTitle: "取消",
                                               otherButtonTitles: ["呼叫", "复制号码", "添加到手机通讯录"],
                                               clickedHandler: clickedHandler)
+            actionSheet.titleFont = UIFont.systemFont(ofSize: 18)
             actionSheet.show()
             
         case 3:
@@ -63,7 +63,6 @@ class ViewController: UITableViewController {
             actionSheet.show()
     
         case 4:
-            
             let title = "这是一条提示,过2秒会添加两条"
             let actionSheet = ActionSheetView(title: title,
                                               cancelButtonTitle: "取消",
@@ -73,6 +72,17 @@ class ViewController: UITableViewController {
                 //actionSheet.insert(buttonTitles: ["测试按钮1", "测试按钮2"], at: 0)
                 actionSheet.append(buttonTitles: ["测试按钮1", "测试按钮2"])
             })
+            actionSheet.show()
+            
+        case 5:
+            let title = "这是一条多个按钮"
+            let otherButtonTitles = ["确定", "稍等", "测试按钮1", "测试按钮2", "测试按钮3"]
+            let actionSheet = ActionSheetView(title: title,
+                                              cancelButtonTitle: "取消",
+                                              otherButtonTitles:otherButtonTitles,
+                                              clickedHandler: clickedHandler)
+            actionSheet.isScrollEnabled = true
+            actionSheet.visibleButtonCount = 2.5
             actionSheet.show()
             
             

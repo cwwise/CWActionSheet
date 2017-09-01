@@ -1,10 +1,11 @@
 //
 //  ActionSheetConfig.swift
-//  CWActionSheetDemo
+//  CWActionSheet
 //
 //  Created by chenwei on 2017/8/31.
 //  Copyright © 2017年 cwwise. All rights reserved.
 //
+
 
 import UIKit
 
@@ -35,6 +36,8 @@ public class ActionSheetConfig {
     public var separatorColor: UIColor
     /// 按钮高亮颜色
     public var buttonHighlightdColor: UIColor
+    /// 是否可以滚动
+    public var isScrollEnabled: Bool
     /// destructive按钮颜色
     public var destructiveButtonColor: UIColor
     /// 是否可以点击其他区域
@@ -56,6 +59,8 @@ public class ActionSheetConfig {
         
         canTouchToDismiss = true
         buttonHighlightdColor = UIColor(hex6: 0xf7f7f7)
+        
+        isScrollEnabled = false
     }
     
 }

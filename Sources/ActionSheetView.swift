@@ -1,10 +1,11 @@
 //
 //  ActionSheetView.swift
-//  CWActionSheetDemo
+//  CWActionSheet
 //
 //  Created by chenwei on 2017/8/31.
 //  Copyright © 2017年 cwwise. All rights reserved.
 //
+
 
 import UIKit
 
@@ -40,6 +41,10 @@ public class ActionSheetView: UIView {
     public var separatorColor: UIColor
     /// 按钮高亮颜色
     public var buttonHighlightdColor: UIColor
+    /// 是否可以滚动
+    public var isScrollEnabled: Bool
+    /// 显示按钮数量 （不能为负数）
+    public var visibleButtonCount: Float = 0
     /// destructive按钮颜色
     public var destructiveButtonColor: UIColor
     /// destructive按钮位置
@@ -58,12 +63,12 @@ public class ActionSheetView: UIView {
     fileprivate var tableView: UITableView!
     /// 背景
     fileprivate var backgroundView: UIView!
-    /// 分割layer
-    private var divisionView: UIView!
+    /// 分割线
+    fileprivate var divisionView: UIView!
     /// 取消按钮
-    private var cancelButton: UIButton!
+    fileprivate var cancelButton: UIButton!
     /// 默认配置
-    private var config: ActionSheetConfig = ActionSheetConfig.default
+    fileprivate var config: ActionSheetConfig = ActionSheetConfig.default
     
     convenience init() {
         let frame = UIScreen.main.bounds
@@ -86,11 +91,11 @@ public class ActionSheetView: UIView {
         titleEdgeInsets = config.titleEdgeInsets
         
         buttonHighlightdColor = config.buttonHighlightdColor
+        canTouchToDismiss = config.canTouchToDismiss        
         
-        canTouchToDismiss = config.canTouchToDismiss
-        
+        isScrollEnabled = config.isScrollEnabled
+
         super.init(frame: frame)
-    
         setupUI()
     }
     
@@ -131,8 +136,6 @@ public class ActionSheetView: UIView {
         addSubview(containerView)
         
         titleLabel = UILabel()
-        titleLabel.font = titleFont
-        titleLabel.textColor = titleColor
         titleLabel.textAlignment = .center
         containerView.addSubview(titleLabel)
 
@@ -141,8 +144,6 @@ public class ActionSheetView: UIView {
         tableView.delegate = self
         tableView.separatorStyle = .none
         tableView.dataSource = self
-        tableView.rowHeight = buttonHeight
-        tableView.isScrollEnabled = false
         tableView.register(ActionSheetCell.self, forCellReuseIdentifier: "cell")
         containerView.addSubview(tableView)
         
@@ -153,9 +154,6 @@ public class ActionSheetView: UIView {
         
         // 取消按钮
         cancelButton = UIButton(type: .custom)
-        cancelButton.titleLabel?.font = buttonFont
-        cancelButton.setTitleColor(buttonColor, for: .normal)
-        cancelButton.setBackgroundImage(UIImage(color: buttonHighlightdColor), for: .highlighted)
         cancelButton.addTarget(self, action: #selector(cancelButtonClicked), for: .touchUpInside)
         containerView.addSubview(cancelButton)
     }
@@ -163,8 +161,20 @@ public class ActionSheetView: UIView {
     /// 计算
     func setupView() {
         
+        if isScrollEnabled == true {
+            assert(visibleButtonCount > 0, "visibleButtonCount 不能小于0")
+        }
+        
+        titleLabel.font = titleFont
+        titleLabel.textColor = titleColor
         titleLabel.numberOfLines = titleLinesNumber
         titleLabel.text = title
+        
+        tableView.rowHeight = buttonHeight
+    
+        cancelButton.titleLabel?.font = buttonFont
+        cancelButton.setTitleColor(buttonColor, for: .normal)
+        cancelButton.setBackgroundImage(UIImage(color: buttonHighlightdColor), for: .highlighted)
         
         var titleEdgeInsetsBottom = titleEdgeInsets.bottom
         if title != nil {
@@ -182,7 +192,14 @@ public class ActionSheetView: UIView {
         }
         
         // layout tableView
-        let tableViewHeight = CGFloat(otherButtonTitles.count) * buttonHeight
+        var tableViewHeight: CGFloat
+        if isScrollEnabled && visibleButtonCount != 0 {
+            tableViewHeight = ceil(CGFloat(visibleButtonCount) * buttonHeight)
+        } else {
+            tableViewHeight = CGFloat(otherButtonTitles.count) * buttonHeight
+        }
+        
+        tableView.isScrollEnabled = isScrollEnabled
         tableView.frame = CGRect(x: 0, y: titleLabel.frame.maxY+titleEdgeInsetsBottom,
                                  width: kScreenWidth, height: tableViewHeight)
         
@@ -205,13 +222,21 @@ public class ActionSheetView: UIView {
     }
     
     
-    // MARK:
+    /// 添加按钮
+    ///
+    /// - Parameters:
+    ///   - buttonTitles: 标题数组
     public func append(buttonTitles: [String]) {
         otherButtonTitles.append(contentsOf: buttonTitles)
         tableView.reloadData()
         setupView()
     }
     
+    /// 在指定位置插入按钮
+    ///
+    /// - Parameters:
+    ///   - buttonTitles: 标题数组
+    ///   - index: 位置
     public func insert(buttonTitles: [String], at index: Int) {
         otherButtonTitles.insert(contentsOf: buttonTitles, at: index)
         tableView.reloadData()
