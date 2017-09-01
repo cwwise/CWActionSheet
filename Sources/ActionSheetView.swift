@@ -47,7 +47,6 @@ public class ActionSheetView: UIView {
     public var visibleButtonCount: Float = 0
     /// destructive按钮颜色
     public var destructiveButtonColor: UIColor
-    
     /// destructive按钮位置
     public var destructiveButtonIndex: Int?
     /// 其他按钮标题
@@ -64,12 +63,12 @@ public class ActionSheetView: UIView {
     fileprivate var tableView: UITableView!
     /// 背景
     fileprivate var backgroundView: UIView!
-    /// 分割layer
-    private var divisionView: UIView!
+    /// 分割线
+    fileprivate var divisionView: UIView!
     /// 取消按钮
-    private var cancelButton: UIButton!
+    fileprivate var cancelButton: UIButton!
     /// 默认配置
-    private var config: ActionSheetConfig = ActionSheetConfig.default
+    fileprivate var config: ActionSheetConfig = ActionSheetConfig.default
     
     convenience init() {
         let frame = UIScreen.main.bounds
