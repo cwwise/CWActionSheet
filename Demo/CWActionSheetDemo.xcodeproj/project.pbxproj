@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1FF348CF1F590FB800BD0112 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FF348CE1F590FB800BD0112 /* LaunchScreen.storyboard */; };
 		8CA9249B1F58472F00570846 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9249A1F58472F00570846 /* AppDelegate.swift */; };
 		8CA9249D1F58472F00570846 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9249C1F58472F00570846 /* ViewController.swift */; };
 		8CA924A01F58472F00570846 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CA9249E1F58472F00570846 /* Main.storyboard */; };
 		8CA924A21F58472F00570846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA924A11F58472F00570846 /* Assets.xcassets */; };
-		8CA924A51F58472F00570846 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CA924A31F58472F00570846 /* LaunchScreen.storyboard */; };
 		8CA924B01F58472F00570846 /* CWActionSheetDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA924AF1F58472F00570846 /* CWActionSheetDemoTests.swift */; };
 		8CA924CF1F584FF600570846 /* CWActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA924C61F584FF500570846 /* CWActionSheet.framework */; };
 		8CA924DB1F584FF600570846 /* CWActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA924C61F584FF500570846 /* CWActionSheet.framework */; };
@@ -68,12 +68,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1FF348CE1F590FB800BD0112 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8CA924971F58472F00570846 /* CWActionSheetDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWActionSheetDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA9249A1F58472F00570846 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CA9249C1F58472F00570846 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8CA9249F1F58472F00570846 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8CA924A11F58472F00570846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8CA924A41F58472F00570846 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8CA924A61F58472F00570846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CA924AB1F58472F00570846 /* CWActionSheetDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWActionSheetDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA924AF1F58472F00570846 /* CWActionSheetDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWActionSheetDemoTests.swift; sourceTree = "<group>"; };
@@ -147,9 +147,9 @@
 			children = (
 				8CA9249A1F58472F00570846 /* AppDelegate.swift */,
 				8CA9249C1F58472F00570846 /* ViewController.swift */,
+				1FF348CE1F590FB800BD0112 /* LaunchScreen.storyboard */,
 				8CA9249E1F58472F00570846 /* Main.storyboard */,
 				8CA924A11F58472F00570846 /* Assets.xcassets */,
-				8CA924A31F58472F00570846 /* LaunchScreen.storyboard */,
 				8CA924A61F58472F00570846 /* Info.plist */,
 			);
 			path = CWActionSheetDemo;
@@ -333,7 +333,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CA924A51F58472F00570846 /* LaunchScreen.storyboard in Resources */,
+				1FF348CF1F590FB800BD0112 /* LaunchScreen.storyboard in Resources */,
 				8CA924A21F58472F00570846 /* Assets.xcassets in Resources */,
 				8CA924A01F58472F00570846 /* Main.storyboard in Resources */,
 			);
@@ -429,14 +429,6 @@
 				8CA9249F1F58472F00570846 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		8CA924A31F58472F00570846 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8CA924A41F58472F00570846 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -704,6 +696,7 @@
 				8CA924DE1F584FF600570846 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8CA924E31F584FF600570846 /* Build configuration list for PBXNativeTarget "CWActionSheetTests" */ = {
 			isa = XCConfigurationList;
@@ -712,6 +705,7 @@
 				8CA924E01F584FF600570846 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
