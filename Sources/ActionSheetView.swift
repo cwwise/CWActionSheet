@@ -43,7 +43,7 @@ public class ActionSheetView: UIView {
     public var buttonHighlightdColor: UIColor
     /// 是否可以滚动
     public var isScrollEnabled: Bool
-    /// 显示按钮数量
+    /// 显示按钮数量 （不能为负数）
     public var visibleButtonCount: Float = 0
     /// destructive按钮颜色
     public var destructiveButtonColor: UIColor
@@ -137,8 +137,6 @@ public class ActionSheetView: UIView {
         addSubview(containerView)
         
         titleLabel = UILabel()
-        titleLabel.font = titleFont
-        titleLabel.textColor = titleColor
         titleLabel.textAlignment = .center
         containerView.addSubview(titleLabel)
 
@@ -147,7 +145,6 @@ public class ActionSheetView: UIView {
         tableView.delegate = self
         tableView.separatorStyle = .none
         tableView.dataSource = self
-        tableView.rowHeight = buttonHeight
         tableView.register(ActionSheetCell.self, forCellReuseIdentifier: "cell")
         containerView.addSubview(tableView)
         
@@ -158,9 +155,6 @@ public class ActionSheetView: UIView {
         
         // 取消按钮
         cancelButton = UIButton(type: .custom)
-        cancelButton.titleLabel?.font = buttonFont
-        cancelButton.setTitleColor(buttonColor, for: .normal)
-        cancelButton.setBackgroundImage(UIImage(color: buttonHighlightdColor), for: .highlighted)
         cancelButton.addTarget(self, action: #selector(cancelButtonClicked), for: .touchUpInside)
         containerView.addSubview(cancelButton)
     }
@@ -168,8 +162,20 @@ public class ActionSheetView: UIView {
     /// 计算
     func setupView() {
         
+        if isScrollEnabled == true {
+            assert(visibleButtonCount > 0, "visibleButtonCount 不能小于0")
+        }
+        
+        titleLabel.font = titleFont
+        titleLabel.textColor = titleColor
         titleLabel.numberOfLines = titleLinesNumber
         titleLabel.text = title
+        
+        tableView.rowHeight = buttonHeight
+    
+        cancelButton.titleLabel?.font = buttonFont
+        cancelButton.setTitleColor(buttonColor, for: .normal)
+        cancelButton.setBackgroundImage(UIImage(color: buttonHighlightdColor), for: .highlighted)
         
         var titleEdgeInsetsBottom = titleEdgeInsets.bottom
         if title != nil {
@@ -217,13 +223,21 @@ public class ActionSheetView: UIView {
     }
     
     
-    // MARK:
+    /// 添加按钮
+    ///
+    /// - Parameters:
+    ///   - buttonTitles: 标题数组
     public func append(buttonTitles: [String]) {
         otherButtonTitles.append(contentsOf: buttonTitles)
         tableView.reloadData()
         setupView()
     }
     
+    /// 在指定位置插入按钮
+    ///
+    /// - Parameters:
+    ///   - buttonTitles: 标题数组
+    ///   - index: 位置
     public func insert(buttonTitles: [String], at index: Int) {
         otherButtonTitles.insert(contentsOf: buttonTitles, at: index)
         tableView.reloadData()

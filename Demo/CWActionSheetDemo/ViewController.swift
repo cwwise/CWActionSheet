@@ -52,6 +52,7 @@ class ViewController: UITableViewController {
                                               cancelButtonTitle: "取消",
                                               otherButtonTitles: ["呼叫", "复制号码", "添加到手机通讯录"],
                                               clickedHandler: clickedHandler)
+            actionSheet.titleFont = UIFont.systemFont(ofSize: 18)
             actionSheet.show()
             
         case 3:
