@@ -1,10 +1,11 @@
 //
 //  ActionSheetView.swift
-//  CWActionSheetDemo
+//  CWActionSheet
 //
 //  Created by chenwei on 2017/8/31.
 //  Copyright © 2017年 cwwise. All rights reserved.
 //
+
 
 import UIKit
 
@@ -40,8 +41,13 @@ public class ActionSheetView: UIView {
     public var separatorColor: UIColor
     /// 按钮高亮颜色
     public var buttonHighlightdColor: UIColor
+    /// 是否可以滚动
+    public var isScrollEnabled: Bool
+    /// 显示按钮数量
+    public var visibleButtonCount: Float = 0
     /// destructive按钮颜色
     public var destructiveButtonColor: UIColor
+    
     /// destructive按钮位置
     public var destructiveButtonIndex: Int?
     /// 其他按钮标题
@@ -86,11 +92,11 @@ public class ActionSheetView: UIView {
         titleEdgeInsets = config.titleEdgeInsets
         
         buttonHighlightdColor = config.buttonHighlightdColor
+        canTouchToDismiss = config.canTouchToDismiss        
         
-        canTouchToDismiss = config.canTouchToDismiss
-        
+        isScrollEnabled = config.isScrollEnabled
+
         super.init(frame: frame)
-    
         setupUI()
     }
     
@@ -142,7 +148,6 @@ public class ActionSheetView: UIView {
         tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.rowHeight = buttonHeight
-        tableView.isScrollEnabled = false
         tableView.register(ActionSheetCell.self, forCellReuseIdentifier: "cell")
         containerView.addSubview(tableView)
         
@@ -182,7 +187,14 @@ public class ActionSheetView: UIView {
         }
         
         // layout tableView
-        let tableViewHeight = CGFloat(otherButtonTitles.count) * buttonHeight
+        var tableViewHeight: CGFloat
+        if isScrollEnabled && visibleButtonCount != 0 {
+            tableViewHeight = ceil(CGFloat(visibleButtonCount) * buttonHeight)
+        } else {
+            tableViewHeight = CGFloat(otherButtonTitles.count) * buttonHeight
+        }
+        
+        tableView.isScrollEnabled = isScrollEnabled
         tableView.frame = CGRect(x: 0, y: titleLabel.frame.maxY+titleEdgeInsetsBottom,
                                  width: kScreenWidth, height: tableViewHeight)
         
