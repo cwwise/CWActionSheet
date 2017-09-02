@@ -14,7 +14,7 @@ before_install:
 
 script:
   - set -o pipefail
-  - xcodebuild -project "$XCODE_PROJECT" -scheme "$SCHEME" -configuration Release clean build | xcpretty -c
+  - xcodebuild -project "$XCODE_PROJECT" -scheme "$SCHEME" -configuration Release clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -c
 
 after_success:
   - sleep 5
