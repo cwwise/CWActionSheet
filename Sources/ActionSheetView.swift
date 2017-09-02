@@ -9,9 +9,6 @@
 
 import UIKit
 
-private let kScreenHeight = UIScreen.main.bounds.height
-private let kScreenWidth = UIScreen.main.bounds.width
-
 /// 点击回调
 public typealias ActionSheetClickedHandler = ((ActionSheetView, Int) -> Void)
 
@@ -70,12 +67,12 @@ public class ActionSheetView: UIView {
     /// 默认配置
     fileprivate var config: ActionSheetConfig = ActionSheetConfig.default
     
-    convenience init() {
+    private convenience init() {
         let frame = UIScreen.main.bounds
         self.init(frame: frame)
     }
     
-    override init(frame: CGRect) {
+    private override init(frame: CGRect) {
         
         cancelButtonTitle = config.cancelButtonTitle
         titleColor = config.titleColor
@@ -172,13 +169,11 @@ public class ActionSheetView: UIView {
         
         tableView.rowHeight = buttonHeight
     
-        cancelButton.titleLabel?.font = buttonFont
-        cancelButton.setTitleColor(buttonColor, for: .normal)
-        cancelButton.setBackgroundImage(UIImage(color: buttonHighlightdColor), for: .highlighted)
-        
+        let contentWidth = self.frame.width
+ 
         var titleEdgeInsetsBottom = titleEdgeInsets.bottom
         if title != nil {
-            let titleWidth = kScreenWidth - titleEdgeInsets.left - titleEdgeInsets.right
+            let titleWidth = contentWidth - titleEdgeInsets.left - titleEdgeInsets.right
             let size = CGSize(width: titleWidth,
                               height: CGFloat.greatestFiniteMagnitude)
             var titleSize = titleLabel.sizeThatFits(size)
@@ -201,24 +196,28 @@ public class ActionSheetView: UIView {
         
         tableView.isScrollEnabled = isScrollEnabled
         tableView.frame = CGRect(x: 0, y: titleLabel.frame.maxY+titleEdgeInsetsBottom,
-                                 width: kScreenWidth, height: tableViewHeight)
+                                 width: contentWidth, height: tableViewHeight)
         
         // 
         let divisionViewHeight: CGFloat = (cancelButtonTitle != nil) ? 5.0 : 0.0
         divisionView.frame = CGRect(x: 0, y: tableView.frame.maxY,
-                                     width: kScreenWidth, height: divisionViewHeight)
+                                     width: contentWidth, height: divisionViewHeight)
         
+        cancelButton.titleLabel?.font = buttonFont
+        cancelButton.setTitleColor(buttonColor, for: .normal)
+        cancelButton.setBackgroundImage(UIImage(color: buttonHighlightdColor), for: .highlighted)
         cancelButton.setTitle(cancelButtonTitle, for: .normal)
+        
         if cancelButtonTitle != nil {
             cancelButton.frame = CGRect(x: 0, y: divisionView.frame.maxY,
-                                        width: kScreenWidth, height: buttonHeight)
+                                        width: contentWidth, height: buttonHeight)
         } else {
             cancelButton.frame = CGRect(x: 0, y: divisionView.frame.maxY,
-                                        width: kScreenWidth, height: 0)
+                                        width: contentWidth, height: 0)
         }
         
-        containerView.frame = CGRect(x: 0, y: kScreenHeight - cancelButton.frame.maxY,
-                                     width: kScreenWidth, height: cancelButton.frame.maxY)
+        containerView.frame = CGRect(x: 0, y: self.frame.height - cancelButton.frame.maxY,
+                                     width: contentWidth, height: cancelButton.frame.maxY)
     }
     
     
