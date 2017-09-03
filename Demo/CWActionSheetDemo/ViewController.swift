@@ -35,6 +35,7 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        // 取消按钮 index = 0
         let clickedHandler = { (sheetView: ActionSheetView, index: Int) in
             print("点击\(index)")
         }

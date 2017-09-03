@@ -7,6 +7,7 @@
 
 * [环境 Requirements](#环境-requirements)
 * [功能 Feature](#功能-feature)
+* [预览 Preview](#预览-preview)
 * [使用 Usage](#使用-usage)
 * [鸣谢 Thanks](#鸣谢-thanks)
 * [许可 License](#许可-license)
@@ -21,13 +22,17 @@
 - [x] 模仿微信ActionSheet
 - [ ] 支持横竖屏旋转
 
+## 预览 Preview
+
+![ActionSheetDemo01](https://github.com/cwwise/CWActionSheet/blob/master/Preview/ActionSheetDemo01.png)
+![ActionSheetDemo02](https://github.com/cwwise/CWActionSheet/blob/master/Preview/ActionSheetDemo02.png)
+
+
 ## 使用 Usage
 
 * 导入方法：
-
-  * 方法一：[CocoaPods](https://cocoapods.org/)：`pod 'CWActionSheet'`
-
-  * 方法二：直接把 Sources文件夹 拖拽到你的项目中
+ 
+  * 方法一（推荐使用）：[CocoaPods](https://cocoapods.org/)：`pod 'CWActionSheet'`
 
 * 在相应位置导入头文件：`import CWActionSheet`
 
