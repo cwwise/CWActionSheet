@@ -47,7 +47,7 @@ public class ActionSheetView: UIView {
     /// destructive按钮位置
     public var destructiveButtonIndex: Int?
     /// 其他按钮标题
-    public var otherButtonTitles: [String] = []
+    fileprivate var otherButtonTitles: [String] = []
     /// 点击事件回调
     public var clickedHandler: ActionSheetClickedHandler?
     /// 是否可以点击其他区域
@@ -94,6 +94,7 @@ public class ActionSheetView: UIView {
 
         super.init(frame: frame)
         setupUI()
+        
     }
     
     /// 初始化方法
@@ -156,7 +157,7 @@ public class ActionSheetView: UIView {
     }
     
     /// 计算
-    func setupView() {
+    func setupSubViews() {
         
         if isScrollEnabled == true {
             assert(visibleButtonCount > 0, "visibleButtonCount 不能小于0")
@@ -228,7 +229,7 @@ public class ActionSheetView: UIView {
     public func append(buttonTitles: [String]) {
         otherButtonTitles.append(contentsOf: buttonTitles)
         tableView.reloadData()
-        setupView()
+        setupSubViews()
     }
     
     /// 在指定位置插入按钮
@@ -239,7 +240,7 @@ public class ActionSheetView: UIView {
     public func insert(buttonTitles: [String], at index: Int) {
         otherButtonTitles.insert(contentsOf: buttonTitles, at: index)
         tableView.reloadData()
-        setupView()
+        setupSubViews()
     }
     
     func backgroundViewClicked() {
@@ -252,7 +253,7 @@ public class ActionSheetView: UIView {
         let keyWindow = UIApplication.shared.keyWindow!
         keyWindow.addSubview(self)
         
-        setupView()
+        setupSubViews()
         containerView.frame = containerView.frame.offsetBy(dx: 0, dy: containerView.frame.height)
         
         UIView.animate(withDuration: animationDuration, delay: 0, options: .curveEaseOut, animations: {
@@ -269,7 +270,7 @@ public class ActionSheetView: UIView {
     }
     
     /// 隐藏ActionSheetView
-    public func hide() {
+    public func dismiss() {
         cancelButtonClicked()
     }
     

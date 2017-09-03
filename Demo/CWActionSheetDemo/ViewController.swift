@@ -17,6 +17,7 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         demoList = ["默认样式", "无title", "多行title", "无取消按钮", "动态添加", "多个按钮"]
         self.tableView.tableFooterView = UIView()
+        self.tableView.backgroundColor = UIColor(red:0.94, green:0.96, blue:0.98, alpha:1.00)
     }
 
     // MARK: TabelViewDataSource
