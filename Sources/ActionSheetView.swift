@@ -243,7 +243,7 @@ public class ActionSheetView: UIView {
         setupSubViews()
     }
     
-    func backgroundViewClicked() {
+    @objc func backgroundViewClicked() {
         cancelButtonClicked()
     }
     
@@ -311,7 +311,7 @@ extension ActionSheetView: UITableViewDelegate, UITableViewDataSource {
 
 extension ActionSheetView {
     
-    func cancelButtonClicked() {
+    @objc func cancelButtonClicked() {
         self.clickedHandler?(self, 0)
         hideWithButtonIndex(0)
     }
