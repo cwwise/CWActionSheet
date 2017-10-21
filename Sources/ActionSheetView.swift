@@ -47,25 +47,25 @@ public class ActionSheetView: UIView {
     /// destructive按钮位置
     public var destructiveButtonIndex: Int?
     /// 其他按钮标题
-    fileprivate var otherButtonTitles: [String] = []
+    private var otherButtonTitles: [String] = []
     /// 点击事件回调
     public var clickedHandler: ActionSheetClickedHandler?
     /// 是否可以点击其他区域
     public var canTouchToDismiss: Bool
     /// 内容View
-    fileprivate var containerView: UIView!
+    private var containerView: UIView!
     /// 标题
-    fileprivate var titleLabel: UILabel!
+    private var titleLabel: UILabel!
     /// 其他按钮tableView
-    fileprivate var tableView: UITableView!
+    private var tableView: UITableView!
     /// 背景
-    fileprivate var backgroundView: UIView!
+    private var backgroundView: UIView!
     /// 分割线
-    fileprivate var divisionView: UIView!
+    private var divisionView: UIView!
     /// 取消按钮
-    fileprivate var cancelButton: UIButton!
+    private var cancelButton: UIButton!
     /// 默认配置
-    fileprivate var config: ActionSheetConfig = ActionSheetConfig.default
+    private var config: ActionSheetConfig = ActionSheetConfig.default
     
     private convenience init() {
         let frame = UIScreen.main.bounds
