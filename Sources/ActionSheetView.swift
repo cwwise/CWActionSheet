@@ -9,6 +9,9 @@
 
 import UIKit
 
+let isIphoneX = (UIScreen.main.bounds.size == CGSize(width: 375.0, height: 812.0))
+let kBottomHeight: CGFloat = isIphoneX ? 34 : 0
+
 /// 点击回调
 public typealias ActionSheetClickedHandler = ((ActionSheetView, Int) -> Void)
 
@@ -66,6 +69,8 @@ public class ActionSheetView: UIView {
     private var cancelButton: UIButton!
     /// 默认配置
     private var config: ActionSheetConfig = ActionSheetConfig.default
+    
+    private var bottomView: UIView!
     
     private convenience init() {
         let frame = UIScreen.main.bounds
@@ -154,6 +159,10 @@ public class ActionSheetView: UIView {
         cancelButton = UIButton(type: .custom)
         cancelButton.addTarget(self, action: #selector(cancelButtonClicked), for: .touchUpInside)
         containerView.addSubview(cancelButton)
+        
+        bottomView = UIView()
+        bottomView.backgroundColor = UIColor(hex6: 0xededee)
+        containerView.addSubview(bottomView)
     }
     
     /// 计算
@@ -187,6 +196,7 @@ public class ActionSheetView: UIView {
             titleEdgeInsetsBottom = 0
         }
         
+    
         // layout tableView
         var tableViewHeight: CGFloat
         if isScrollEnabled && visibleButtonCount != 0 {
@@ -206,6 +216,7 @@ public class ActionSheetView: UIView {
         
         cancelButton.titleLabel?.font = buttonFont
         cancelButton.setTitleColor(buttonColor, for: .normal)
+        cancelButton.setBackgroundImage(UIImage(color: UIColor.white), for: .normal)
         cancelButton.setBackgroundImage(UIImage(color: buttonHighlightdColor), for: .highlighted)
         cancelButton.setTitle(cancelButtonTitle, for: .normal)
         
@@ -217,8 +228,12 @@ public class ActionSheetView: UIView {
                                         width: contentWidth, height: 0)
         }
         
-        containerView.frame = CGRect(x: 0, y: self.frame.height - cancelButton.frame.maxY,
-                                     width: contentWidth, height: cancelButton.frame.maxY)
+        // 添加背景
+        bottomView.frame = CGRect(x: 0, y: cancelButton.frame.maxY,
+                                  width: contentWidth, height: kBottomHeight)
+   
+        containerView.frame = CGRect(x: 0, y: self.frame.height - cancelButton.frame.maxY-kBottomHeight,
+                                     width: contentWidth, height: cancelButton.frame.maxY+kBottomHeight)
     }
     
     
