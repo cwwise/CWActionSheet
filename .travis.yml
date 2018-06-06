@@ -5,9 +5,9 @@ env:
   global:
     - LANG=en_US.UTF-8
     - LC_ALL=en_US.UTF-8
-    - XCODE_PROJECT=./Demo/CWActionSheetDemo.xcodeproj
+    - XCODE_PROJECT=./CWActionSheet.xcworkspace
   matrix:
-    - SCHEME="CWActionSheetDemo"
+    - SCHEME="CWActionSheet"
 
 before_install:
   - gem install xcpretty --quiet

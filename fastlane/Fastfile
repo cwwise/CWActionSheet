@@ -1,0 +1,120 @@
+
+fastlane_version "2.0.0"
+
+default_platform :ios
+
+# 进行设定与初始化。
+class AexConfig
+  attr_accessor :name
+  attr_accessor :workspace
+  attr_accessor :scheme
+  attr_accessor :specName
+
+  def initialize()
+    @workspace = nil
+    @scheme = nil
+    yield(self)
+    if @workspace == nil
+      @workspace = @name + ".xcworkspace"
+    end
+    if @scheme == nil
+      @scheme = @name
+    end
+    @specName = @name + ".podspec"
+  end
+end
+
+# 解析和检测配置文件。
+config_file = "../axe/Axefile.rb"
+unless File.exist?(config_file)
+  UI.error "请在根目录创建axe文件夹， 然后设置Axefile.rb文件 "
+  exit(1)
+end
+content = File.read config_file
+$axeConfig = eval(content)
+
+platform :ios do
+  before_all do
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    scan
+  end
+  
+  desc "Lint"
+  lane :lint do
+      pod_lib_lint
+  end
+
+  desc "Release new version"
+  lane :release do |options|
+      target_version = options[:version]
+      raise "The version is missed. Use `fastlane release version:{version_number}`.`" if target_version.nil?
+
+      ensure_git_branch
+      ensure_git_status_clean
+      
+      #test
+      lint
+      
+      version_bump_podspec(path: $axeConfig.specName, version_number: target_version)
+      
+      # 提交版本号修改
+      git_add(path: ".")
+      git_commit(path: ".", message: "update version to #{target_version}")
+      # 设置 tag 
+      add_git_tag(tag: target_version) 
+
+      push_to_git_remote
+      # 提交到私有仓库
+      podpush
+  end
+
+  # module类型打包
+  def axe_framework 
+    #   清理 build目录
+    sh("rm -rf ../build")
+    #   真机
+    xcodebuild(
+        workspace: $axeConfig.workspace,
+        scheme: $axeConfig.scheme,
+        silent: true,
+        clean: true,
+        build: true,
+        configuration: 'Release',
+        sdk: "iphoneos",
+        derivedDataPath: "build/iphoneos"
+      ) 
+    # 模拟器
+    xcodebuild(
+        workspace: $axeConfig.workspace,
+        scheme: $axeConfig.scheme,
+        silent: true,
+        clean: true,
+        build: true,
+        configuration: 'Release',
+        sdk: "iphonesimulator",
+        derivedDataPath: "build/iphonesimulator"
+      ) 
+    # 合并两种架构
+    sh("cp -R ../build/iphoneos/Build/Products/Release-iphoneos/#{$axeConfig.scheme}.framework ../build/#{$axeConfig.scheme}.framework")
+    sh("lipo -create '../build/iphonesimulator/Build/Products/Release-iphonesimulator/#{$axeConfig.scheme}.framework/#{$axeConfig.scheme}' '../build/#{$axeConfig.scheme}.framework/#{$axeConfig.scheme}' -output '../build/#{$axeConfig.scheme}.framework/#{$axeConfig.scheme}'")
+    if File.exist?("../axe/#{$axeConfig.scheme}.framework")
+      sh("rm -rf '../axe/#{$axeConfig.scheme}.framework'")
+    end
+    sh("cp -R '../build/#{$axeConfig.scheme}.framework' '../axe/#{$axeConfig.scheme}.framework'")
+  end
+
+  lane :podpush do
+      pod_push(path:$axeConfig.specName) 
+  end
+
+  after_all do |lane|
+
+  end
+
+  error do |lane, exception|
+
+  end
+end

@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  CWActionSheetDemo
 //
-//  Created by wei chen on 2017/8/31.
-//  Copyright © 2017年 wei chen. All rights reserved.
+//  Created by wei chen on 2018/6/6.
+//  Copyright © 2018 wei chen. All rights reserved.
 //
 
 import UIKit
