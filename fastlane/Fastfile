@@ -4,7 +4,7 @@ fastlane_version "2.0.0"
 default_platform :ios
 
 # 进行设定与初始化。
-class AexConfig
+class AxeConfig
   attr_accessor :name
   attr_accessor :workspace
   attr_accessor :scheme
